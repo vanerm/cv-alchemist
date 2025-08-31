@@ -5,6 +5,9 @@
 ### Nombre del Proyecto
 **CV-Alchemist** - Sistema de Optimización Automatizada de Currículums Vitae mediante Ingeniería de Prompts y Modelos de IA Generativa
 
+### 📄 Documentación del Proyecto
+📋 [Presentación de la Propuesta del Proyecto - Preentrega 1](https://drive.google.com/drive/folders/1X2dqfK3OR3Mr3GC48yVokHiRC6Oa0qMy)
+
 ### Presentación del Problema a Abordar
 
 En el mercado laboral actual, los candidatos enfrentan un desafío crítico: **la optimización de CVs para sistemas ATS (Applicant Tracking Systems)** y la adaptación específica para cada oferta de trabajo. Este problema es especialmente relevante porque:
