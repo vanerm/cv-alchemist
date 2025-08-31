@@ -1,3 +1,4 @@
 google-generativeai>=0.3.0
 PyPDF2>=3.0.0
-google-colab>=0.0.1 
+google-colab>=0.0.1
+reportlab>=4.0.0 

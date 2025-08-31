@@ -121,8 +121,8 @@ Este es el último dato que necesitamos. Pegar aquí la descripción completa de
 
 # Configuramos el modelo de Gemini que vamos a utilizar.
 # modelo = genai.GenerativeModel('gemini-1.5-pro-latest')
-# modelo = genai.GenerativeModel('gemini-2.5-flash-lite')
-modelo = genai.GenerativeModel('gemini-1.5-flash-latest')
+modelo = genai.GenerativeModel('gemini-2.5-flash-lite')
+# modelo = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 def generar_contenido_con_gemini(prompt):
     print("\n⏳ Enviando prompt a Gemini... (esto puede tardar unos segundos)")
@@ -329,3 +329,157 @@ else:
     # Si la Etapa 1 falla, la variable 'cv_maestro_actualizado' estará vacía.
     # Este bloque detiene el proceso para evitar errores y guía al usuario al diagnóstico ya impreso.
     print("\n🚨 No se pudo continuar a la Etapa 2 porque la Etapa 1 falló. Revisa el análisis del error detallado arriba para ver los siguientes pasos.")
+
+"""# Generación de PDFs
+
+### Funcionalidad Automática
+Generación automáticamente documentos PDF de los CVs generados:
+
+- **CV Maestro Actualizado**: PDF del CV base con la nueva formación integrada
+- **CV Final Optimizado**: PDF del CV optimizado para el puesto específico
+"""
+
+!pip install reportlab
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Generador de PDFs para CV-Alchemist
+====================================
+
+Este script genera PDFs de los CVs generados por el sistema CV-Alchemist.
+Se puede usar después de ejecutar el notebook principal para crear documentos
+descargables de los CVs generados.
+
+Uso:
+    python generador_pdfs.py
+"""
+
+import os
+import datetime
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_LEFT, TA_JUSTIFY
+
+def generar_pdf(texto, nombre_archivo, titulo):
+    """
+    Genera un PDF a partir del texto proporcionado.
+
+    Args:
+        texto (str): El texto del CV a convertir
+        nombre_archivo (str): Ruta del archivo PDF a generar
+        titulo (str): Título del documento
+    """
+    doc = SimpleDocTemplate(nombre_archivo, pagesize=A4)
+    story = []
+
+    # Estilos
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Heading1'],
+        fontSize=16,
+        spaceAfter=30,
+        alignment=TA_LEFT
+    )
+    normal_style = ParagraphStyle(
+        'CustomNormal',
+        parent=styles['Normal'],
+        fontSize=11,
+        spaceAfter=12,
+        alignment=TA_JUSTIFY
+    )
+
+    # Título del documento
+    story.append(Paragraph(titulo, title_style))
+    story.append(Spacer(1, 20))
+
+    # Dividir el texto en párrafos y procesar
+    parrafos = texto.split('\n\n')
+    for parrafo in parrafos:
+        if parrafo.strip():
+            # Limpiar el texto de caracteres especiales
+            parrafo_limpio = parrafo.strip().replace('*', '').replace('**', '')
+            story.append(Paragraph(parrafo_limpio, normal_style))
+            story.append(Spacer(1, 10))
+
+    # Generar PDF
+    doc.build(story)
+    print(f"✅ PDF generado: {nombre_archivo}")
+
+def generar_pdfs_cv(cv_maestro_actualizado, cv_final_optimizado, carpeta_salida="cvs_generados"):
+    """
+    Genera PDFs de ambos CVs generados.
+
+    Args:
+        cv_maestro_actualizado (str): Texto del CV maestro actualizado
+        cv_final_optimizado (str): Texto del CV final optimizado
+        carpeta_salida (str): Carpeta donde guardar los PDFs
+    """
+    try:
+        # Creamos carpeta para los PDFs generados
+        os.makedirs(carpeta_salida, exist_ok=True)
+
+        # Generar PDF del CV Maestro
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        pdf_cv_maestro = os.path.join(carpeta_salida, f'CV_Maestro_Actualizado_{timestamp}.pdf')
+        generar_pdf(cv_maestro_actualizado, pdf_cv_maestro, "CV Maestro Actualizado")
+
+        # Generar PDF del CV Final Optimizado
+        pdf_cv_final = os.path.join(carpeta_salida, f'CV_Final_Optimizado_{timestamp}.pdf')
+        generar_pdf(cv_final_optimizado, pdf_cv_final, "CV Final Optimizado")
+
+        print(f"\n🎉 ¡PDFs generados exitosamente!")
+        print(f"📁 Ubicación: {carpeta_salida}/")
+        print(f"📄 Archivos generados:")
+        print(f"   - {os.path.basename(pdf_cv_maestro)}")
+        print(f"   - {os.path.basename(pdf_cv_final)}")
+
+        return pdf_cv_maestro, pdf_cv_final
+
+    except Exception as e:
+        print(f"⚠️ Error al generar PDFs: {e}")
+        return None, None
+
+def main():
+    """
+    Función principal para demostrar el uso del generador de PDFs.
+    """
+    print("📄 Generador de PDFs para CV-Alchemist")
+    print("=" * 50)
+
+    # Ejemplo de uso (reemplaza con tus CVs reales)
+    cv_maestro_ejemplo = """
+Vanesa Mizrahi
+vanesarmizrahi@gmail.com
+www.linkedin.com/in/vanesamizrahi
+
+**Resumen Profesional**
+
+Enthusiasta de la ciencia de datos con experiencia en desarrollo de software y análisis funcional, con un sólido background en auditoría y profundos conocimientos en análisis exploratorio de datos (EDA), visualización de datos y machine learning. He completado recientemente una diplomatura en Data Science en Coderhouse y adquirido nuevas habilidades en el procesamiento de datos con Excel, incluyendo el uso de tablas dinámicas, funciones avanzadas y la creación de dashboards.
+"""
+
+    cv_final_ejemplo = """
+Vanesa Mizrahi
+vanesarmizrahi@gmail.com
+www.linkedin.com/in/vanesamizrahi
+
+**Resumen Profesional**
+
+Analista de datos con sólida formación en Data Science y experiencia en desarrollo de software, especializada en análisis exploratorio de datos (EDA), visualización de datos y machine learning. Graduada de la Diplomatura en Data Science de Coderhouse con dominio en Excel, SQL, Python, Power BI, Tableau y herramientas de IA. Experiencia en ingeniería de prompts y automatización de procesos. Busco aplicar mis habilidades analíticas y técnicas en un rol de Analista de Datos.
+"""
+
+    print("🔧 Generando PDFs de ejemplo...")
+    generar_pdfs_cv(cv_maestro_ejemplo, cv_final_ejemplo)
+
+    print("\n💡 Para usar con tus CVs reales:")
+    print("1. Reemplaza las variables cv_maestro_ejemplo y cv_final_ejemplo")
+    print("2. Con los textos de tus CVs generados por CV-Alchemist")
+    print("3. Ejecuta: generar_pdfs_cv(tu_cv_maestro, tu_cv_final)")
+
+if __name__ == "__main__":
+    main()
+
+# Call the function to generate PDFs using the actual generated CVs
+generar_pdfs_cv(cv_maestro_actualizado, cv_final_optimizado)

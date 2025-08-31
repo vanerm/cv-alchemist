@@ -150,6 +150,7 @@ y estructurarlo de forma clara y concisa.
 - Cuenta de Google Cloud con API Key de Gemini
 - Acceso a Google Colab
 - Archivos PDF del CV base y plan de estudios
+- Librería `reportlab` para generación de PDFs (incluida en requirements.txt)
 
 ### Instalación y Configuración Local
 
@@ -180,6 +181,8 @@ cd cv-alchemist
 ```bash
 pip install -r requirements.txt
 ```
+
+**Nota:** El archivo `requirements.txt` incluye `reportlab` para la generación automática de PDFs de los CVs generados.
 
 #### Paso 4: Preparar Archivos PDF
 - Coloca tu CV base en la carpeta `cv_base/`
@@ -216,6 +219,7 @@ genai.configure(api_key=tu_api_key)
    - 📁 [Acceso a carpeta cv_base en Google Drive](https://drive.google.com/drive/folders/15Y1emmxg4M2XlRbY8oY-AWJ2VHEge3YR?usp=drive_link)
    - 📁 [Acceso a carpeta plan_de_estudios en Google Drive](https://drive.google.com/drive/folders/13868l7n-mJJ_vfZD8g5x_RYOXDjJVQoa?usp=drive_link)
 5. **Ejecutar** el script principal: `python proyecto_cv_alchemist.py`
+6. **📄 PDFs generados automáticamente** en la carpeta `cvs_generados/`
 
 #### Para Usuarios de Google Colab:
 1. **Abrir** el notebook `Proyecto_CV_Alchemist.ipynb` en Colab
@@ -225,12 +229,39 @@ genai.configure(api_key=tu_api_key)
    - 📁 [Acceso a carpeta plan_de_estudios en Google Drive](https://drive.google.com/drive/folders/13868l7n-mJJ_vfZD8g5x_RYOXDjJVQoa?usp=drive_link)
 4. **Ejecutar** todas las celdas en secuencia
 5. **Obtener** los CVs optimizados
+6. **📄 PDFs generados automáticamente** en `/content/cvs_generados/`
 
 ### ⚠️ Notas Importantes
 - **NUNCA subas `config.py` a GitHub** (está protegido por .gitignore)
 - **`config_example.py` SÍ se sube** como referencia para otros usuarios
 - **Mantén tu API key segura** y no la compartas públicamente
 - **Para uso en Colab**, usa los Secrets integrados en lugar de archivos de configuración
+
+## 📄 Generación de PDFs
+
+### Funcionalidad Automática Integrada
+El sistema CV-Alchemist incluye **generación automática de PDFs** integrada directamente en el flujo de trabajo principal:
+
+- **CV Maestro Actualizado**: PDF del CV base con la nueva formación integrada
+- **CV Final Optimizado**: PDF del CV optimizado para el puesto específico
+
+### Archivos Incluidos
+- **`Proyecto_CV_Alchemist.ipynb`**: Notebook principal con generación automática de PDFs integrada
+- **`proyecto_cv_alchemist.py`**: Script Python con funcionalidad de PDFs incluida
+- **`requirements.txt`**: Incluye `reportlab` para la generación de PDFs
+
+### Uso Automático
+```python
+# Los PDFs se generan automáticamente al final del proceso
+# No requiere pasos adicionales ni scripts separados
+```
+
+### Características de los PDFs
+- **Formato profesional**: A4 con estilos consistentes
+- **Timestamp automático**: Nombres únicos con fecha y hora
+- **Carpeta organizada**: Todos los PDFs se guardan en `cvs_generados/`
+- **Descarga directa**: Listos para usar en aplicaciones de trabajo
+- **Integración completa**: Funciona tanto en Google Colab como localmente
 
 ## 📊 Resultados Esperados
 
@@ -252,12 +283,14 @@ genai.configure(api_key=tu_api_key)
 - Análisis de sentimiento en descripciones de puestos
 - Generación automática de cartas de presentación
 - Dashboard de métricas de efectividad
+- **✅ Generación automática de PDFs** (Implementado)
 
 ### Optimización Técnica
 - Implementación de caché para respuestas de IA
 - Paralelización del procesamiento de múltiples CVs
 - Interfaz web para usuarios no técnicos
 - API REST para integración con otros sistemas
+- **✅ Formato PDF profesional** (Implementado)
 
 ---
 
