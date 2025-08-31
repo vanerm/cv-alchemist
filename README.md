@@ -6,7 +6,7 @@
 **CV-Alchemist** - Sistema de Optimización Automatizada de Currículums Vitae mediante Ingeniería de Prompts y Modelos de IA Generativa
 
 ### 📄 Documentación del Proyecto
-📋 [Presentación de la Propuesta del Proyecto - Preentrega 1](https://drive.google.com/file/d/1fMh9jzWs6ENSqsfOZhWcoQ_rZp5JKbWR/view?usp=drive_link)
+📋 [Presentación de la Propuesta del Proyecto](https://drive.google.com/file/d/1fMh9jzWs6ENSqsfOZhWcoQ_rZp5JKbWR/view?usp=drive_link)
 
 ### Presentación del Problema a Abordar
 
