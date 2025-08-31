@@ -259,7 +259,7 @@ genai.configure(api_key=tu_api_key)
 ---
 
 ## 📝 Licencia
-Este proyecto es parte del curso de Prompting Engineer y está destinado a fines educativos y de desarrollo profesional.
+Este proyecto fue desarrollado como parte de la [Diplomatura de Data Science en Coder House](https://www.coderhouse.com/ar/diplomaturas/data/) y está destinado a fines educativos y de desarrollo profesional.
 
 ## 👥 Autor
 **Vanesa Mizrahi** - Estudiante de Data Science y Prompting Engineer
