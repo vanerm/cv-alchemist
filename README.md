@@ -180,7 +180,9 @@ pip install -r requirements.txt
 
 #### Paso 4: Preparar Archivos PDF
 - Coloca tu CV base en la carpeta `cv_base/`
+  - 📁 [Acceso a carpeta cv_base en Google Drive](https://drive.google.com/drive/folders/15Y1emmxg4M2XlRbY8oY-AWJ2VHEge3YR?usp=drive_link)
 - Coloca los archivos de tu plan de estudios en `plan_de_estudios/`
+  - 📁 [Acceso a carpeta plan_de_estudios en Google Drive](https://drive.google.com/drive/folders/13868l7n-mJJ_vfZD8g5x_RYOXDjJVQoa?usp=drive_link)
 
 ### Uso en Google Colab
 
@@ -208,12 +210,16 @@ genai.configure(api_key=tu_api_key)
 2. **Configurar** la API key en `config.py`
 3. **Instalar** dependencias con `pip install -r requirements.txt`
 4. **Preparar** archivos PDF en las carpetas correspondientes
+   - 📁 [Acceso a carpeta cv_base en Google Drive](https://drive.google.com/drive/folders/15Y1emmxg4M2XlRbY8oY-AWJ2VHEge3YR?usp=drive_link)
+   - 📁 [Acceso a carpeta plan_de_estudios en Google Drive](https://drive.google.com/drive/folders/13868l7n-mJJ_vfZD8g5x_RYOXDjJVQoa?usp=drive_link)
 5. **Ejecutar** el script principal: `python proyecto_cv_alchemist.py`
 
 #### Para Usuarios de Google Colab:
 1. **Abrir** el notebook `Proyecto_CV_Alchemist.ipynb` en Colab
 2. **Configurar** la API key en los Secrets de Colab
 3. **Subir** archivos PDF usando el panel de archivos
+   - 📁 [Acceso a carpeta cv_base en Google Drive](https://drive.google.com/drive/folders/15Y1emmxg4M2XlRbY8oY-AWJ2VHEge3YR?usp=drive_link)
+   - 📁 [Acceso a carpeta plan_de_estudios en Google Drive](https://drive.google.com/drive/folders/13868l7n-mJJ_vfZD8g5x_RYOXDjJVQoa?usp=drive_link)
 4. **Ejecutar** todas las celdas en secuencia
 5. **Obtener** los CVs optimizados
 
